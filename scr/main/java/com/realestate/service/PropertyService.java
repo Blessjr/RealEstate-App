@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 @Service
 public class PropertyService {
@@ -39,25 +40,32 @@ public class PropertyService {
     }
 
     public void updateProperty(Long id, Property updatedProperty, MultipartFile imageFile) {
-        Property existingProperty = propertyRepository.findById(id).orElseThrow();
+        Optional<Property> optionalProperty = propertyRepository.findById(id);
+        
+        if (optionalProperty.isPresent()) {
+            Property existingProperty = optionalProperty.get();
 
-        existingProperty.setTitle(updatedProperty.getTitle());
-        existingProperty.setDescription(updatedProperty.getDescription());
-        existingProperty.setPrice(updatedProperty.getPrice());
-        existingProperty.setLocation(updatedProperty.getLocation());
+            existingProperty.setTitle(updatedProperty.getTitle());
+            existingProperty.setDescription(updatedProperty.getDescription());
+            existingProperty.setPrice(updatedProperty.getPrice());
+            existingProperty.setLocation(updatedProperty.getLocation());
 
-        try {
-            if (imageFile != null && !imageFile.isEmpty()) {
-                String fileName = imageFile.getOriginalFilename();
-                Path filePath = Paths.get(UPLOAD_DIR + fileName);
-                Files.write(filePath, imageFile.getBytes());
-                existingProperty.setImage(fileName);
+            try {
+                if (imageFile != null && !imageFile.isEmpty()) {
+                    String fileName = imageFile.getOriginalFilename();
+                    Path filePath = Paths.get(UPLOAD_DIR + fileName);
+                    Files.write(filePath, imageFile.getBytes());
+                    existingProperty.setImage(fileName);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        propertyRepository.save(existingProperty);
+            propertyRepository.save(existingProperty);
+        } else {
+            // Handle the case when the property is not found, for example by throwing an exception
+            throw new IllegalArgumentException("Property not found with id: " + id);
+        }
     }
 
     public Property getPropertyById(Long id) {

@@ -2,7 +2,7 @@ package com.realestate.service;
 
 import com.realestate.entity.User;
 import com.realestate.repository.UserRepository;
-import com.realestate.security.JwtTokenProvider;
+import com.realestate.config.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -35,5 +35,13 @@ public class AuthService {
         String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    @Service
+    public class authService {
+        public void registerUser(User user) {
+            // Dummy logic for registration
+            System.out.println("User registered: " + user.getUsername());
+        }
     }
 }

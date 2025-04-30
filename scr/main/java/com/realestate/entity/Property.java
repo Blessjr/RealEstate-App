@@ -13,22 +13,59 @@ public class Property {
     private Long id;
 
     private String title;
-
     private String description;
-
-    private double price;
-
+    private Double price;
     private String location;
+    private String image; // This field will store the image filename
 
-    private String imageUrl;
+    // Getters and Setters
 
-    private String status; // Example: "Available", "Sold", "Pending"
+    public Long getId() {
+        return id;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "seller_id")
-    private User seller;
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "agent_id")
-    private User agent;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    // Add the setImage method to assign the image filename
+    public void setImage(String image) {
+        this.image = image;
+    }
 }
