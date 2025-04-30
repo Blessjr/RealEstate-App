@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buyer Dashboard</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container mt-5">
+    <h2 class="text-center">Buyer Dashboard</h2>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card bg-success text-white shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Browse Properties</h5>
+                    <a href="/properties" class="btn btn-light btn-sm">Browse Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Agent Dashboard | RealEstateApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Agent Dashboard</a>
+        <form class="d-flex">
+            <a class="btn btn-outline-light" href="/logout">Logout</a>
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 bg-light p-3">
+            <h5>Menu</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a href="/agent/dashboard" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="/agent/properties" class="nav-link">View Properties</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10">
+            <h3>Welcome, <span th:text="${agent.firstName}">Agent</span>!</h3>
+            <p>Assist buyers and sellers to close deals.</p>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    Active Listings
+                </div>
+                <div class="card-body">
+                    <ul class="list-group" th:each="property : ${properties}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span th:text="${property.title}">Property Title</span>
+                            <span class="badge bg-primary rounded-pill" th:text="'$'+${property.price}">Price</span>
+                        </li>
+                    </ul>
+                    <p th:if="${properties.size() == 0}">No active listings available.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

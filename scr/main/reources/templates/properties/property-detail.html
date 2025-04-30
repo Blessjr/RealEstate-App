@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Property Details</title>
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container mt-5">
+    <h2 th:text="${property.title}">Beautiful House</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="@{'/images/' + ${property.image}}" alt="Property Image" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <p th:text="${property.description}">This is a beautiful home with a lovely backyard...</p>
+            <p><strong>Price: </strong><span th:text="${property.price}">$250,000</span></p>
+            <p><strong>Location: </strong><span th:text="${property.location}">New York, NY</span></p>
+
+            <h3>Contact Seller</h3>
+            <form th:action="@{/property/inquire/{id}(id=${property.id})}" method="post">
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Inquire Now</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Dashboard | RealEstateApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Seller Dashboard</a>
+        <form class="d-flex">
+            <a class="btn btn-outline-light" href="/logout">Logout</a>
+        </form>
+    </div>
+</nav>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 bg-light p-3">
+            <h5>Menu</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item"><a href="/seller/dashboard" class="nav-link">Dashboard</a></li>
+                <li class="nav-item"><a href="/seller/add-property" class="nav-link">Add Property</a></li>
+                <li class="nav-item"><a href="/seller/my-properties" class="nav-link">My Properties</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-10">
+            <h3>Welcome, <span th:text="${seller.firstName}">Seller</span>!</h3>
+            <p>You have <b th:text="${propertyCount}">0</b> properties listed.</p>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    Recent Inquiries
+                </div>
+                <div class="card-body">
+                    <p th:if="${inquiries.size() == 0}">No recent inquiries.</p>
+                    <ul class="list-group" th:each="inquiry : ${inquiries}">
+                        <li class="list-group-item">
+                            <b th:text="${inquiry.buyer.name}">Buyer Name</b> inquired about 
+                            <i th:text="${inquiry.property.title}">Property Title</i> - 
+                            <span th:text="${inquiry.message}">Message</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
