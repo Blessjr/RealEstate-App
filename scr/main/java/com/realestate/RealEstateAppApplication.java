@@ -1,4 +1,4 @@
-package com.realestate;
+package com.realestate;  // Must match the error message and folder structure
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,4 +9,3 @@ public class RealEstateAppApplication {
         SpringApplication.run(RealEstateAppApplication.class, args);
     }
 }
-

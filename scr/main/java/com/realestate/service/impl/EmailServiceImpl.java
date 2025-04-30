@@ -9,20 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    private final JavaMailSender mailSender;
-
     @Autowired
-    public EmailServiceImpl(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    private JavaMailSender mailSender;
 
     @Override
-    public void sendWelcomeEmail(String to) {
+    public void sendSimpleEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setSubject("Welcome to Real Estate App");
-        message.setText("Thank you for registering. We’re excited to have you on board!");
-
+        message.setSubject(subject);
+        message.setText(body);
         mailSender.send(message);
     }
 }
+

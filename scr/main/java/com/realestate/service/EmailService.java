@@ -28,4 +28,8 @@ public class EmailService {
         String body = "Thank you for registering with RealEstate App!";
         sendEmail(email, subject, body);
     }
+
+    public interface EmailService {
+        void sendSimpleEmail(String to, String subject, String body);
+    }    
 }

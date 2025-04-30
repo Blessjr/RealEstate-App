@@ -31,7 +31,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public interface userService {
+    public interface UserService {
         User findByEmail(String email);
     }
+    
 }
